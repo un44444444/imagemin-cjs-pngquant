@@ -4,6 +4,8 @@ const isPng = require('is-png');
 const isStream = require('is-stream');
 const pngquant = require('pngquant-bin');
 const ow = require('ow');
+const os = require("os");
+const path = require('path');
 
 const imageminPngquant = (options = {}) => input => {
 	const isBuffer = Buffer.isBuffer(input);
@@ -57,7 +59,29 @@ const imageminPngquant = (options = {}) => input => {
 		args.push('--verbose');
 	}
 
-	const subprocess = execa(pngquant, args, {
+	// fix: in pkg can not spawn pngquant.exe
+	let newPngQuant = pngquant;
+	let isInPkg = false;
+	const platform = os.platform();
+	if (platform.startsWith('win')) {
+		if (pngquant.startsWith('C:\\snapshot\\')) {
+			isInPkg = true;
+		}
+	}
+	else {
+		if (pngquant.startsWith('/snapshot/')) {
+			isInPkg = true;
+		}
+	}
+	if (isInPkg) {
+		const sepIndex = pngquant.lastIndexOf(path.sep);
+		if (sepIndex > 0) {
+			const filePngquant = pngquant.substring(sepIndex + 1);
+			newPngQuant = filePngquant;
+		}
+	}
+
+	const subprocess = execa(newPngQuant, args, {
 		encoding: null,
 		maxBuffer: Infinity,
 		input

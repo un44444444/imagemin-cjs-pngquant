@@ -1,9 +1,9 @@
 {
-	"name": "imagemin-pngquant",
+	"name": "imagemin-cjs-pngquant",
 	"version": "9.0.2",
 	"description": "Imagemin plugin for `pngquant`",
 	"license": "MIT",
-	"repository": "imagemin/imagemin-pngquant",
+	"repository": "un44444444/imagemin-cjs-pngquant",
 	"engines": {
 		"node": ">=10"
 	},

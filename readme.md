@@ -2,19 +2,20 @@
 
 > [Imagemin](https://github.com/imagemin/imagemin) plugin for [`pngquant`](https://github.com/kornelski/pngquant)
 
+> fix: in pkg can not spawn pngquant.exe
 
 ## Install
 
 ```
-$ npm install imagemin-pngquant
+$ npm install imagemin-cjs-pngquant
 ```
 
 
 ## Usage
 
 ```js
-const imagemin = require('imagemin');
-const imageminPngquant = require('imagemin-pngquant');
+const imagemin = require('imagemin-cjs/cjs');
+const imageminPngquant = require('imagemin-cjs-pngquant');
 
 (async () => {
 	await imagemin(['images/*.png'], {
